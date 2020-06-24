@@ -1,5 +1,6 @@
 import React from "react";
 import { Layout, Form, Input, Button } from "antd";
+import axios from "axios";
 import "antd/dist/antd.css";
 
 const { Content } = Layout;
@@ -11,14 +12,21 @@ const ContactUs = () => {
   };
 
   const validateMessages = {
-    required: `name is not a!`,
+    required: `Pleaset input name`,
     types: {
-      email: `email is not r!`,
+      email: `Please input email`,
     },
   };
 
   const onFinish = (values) => {
-    console.log(values);
+    console.log(values.user);
+    axios
+      .post("https://jsonblob.com/api/jsonBlob/", {
+        name: values.user.name,
+        email: values.user.email,
+        message: values.user.message,
+      })
+      .then((res) => console.log(res));
   };
 
   return (
@@ -48,7 +56,7 @@ const ContactUs = () => {
             >
               <Input />
             </Form.Item>
-            <Form.Item name={["user", "introduction"]} label="Introduction">
+            <Form.Item name={["user", "message"]} label="Message">
               <Input.TextArea />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

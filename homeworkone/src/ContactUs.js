@@ -26,7 +26,7 @@ const ContactUs = () => {
         email: values.user.email,
         message: values.user.message,
       })
-      .then((res) => console.log(res));
+      .then((res) => window.open(res.headers.location));
   };
 
   return (
